@@ -37,6 +37,23 @@ void ListPeople(const tutorial::AddressBook& address_book) {
     }
 }
 
+void ModifyPeople(tutorial::AddressBook& address_book) {
+    for(int i = 0; i < address_book.people_size();i++){
+            tutorial::Person* people = address_book.mutable_people(i);
+            people->set_id(666);
+            if (people->has_email())
+            {
+                people->set_email("another.email");
+            }
+            for (int j = 0; j < people->phones_size(); j++) {
+                tutorial::Person_PhoneNumber* phone_number = people->mutable_phones(j);
+                phone_number->set_number("987654321");
+                phone_number->set_type(tutorial::Person_PhoneType_HOME);
+            }
+        }
+
+}
+
 // Main function:  Reads the entire address book from a file and prints all
 //   the information inside.
 int main(int argc, char* argv[]) {
@@ -61,7 +78,8 @@ int main(int argc, char* argv[]) {
     }
 
     ListPeople(address_book);
-
+    ModifyPeople(address_book);
+    ListPeople(address_book);
     // Optional:  Delete all global objects allocated by libprotobuf.
     google::protobuf::ShutdownProtobufLibrary();
 
