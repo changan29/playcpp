@@ -82,7 +82,57 @@ Person ID: 666
 
 ### proto 2/3 的差别
 
-- TODO
+- 版本
+proto文件中的第一行非空白非注释行
+
+```
+syntax = "proto3"
+表示使用proto3的语法，否则默认使用proto2的语法
+```
+- 字段
+
+```
+移除required，将optional改名为singular。
+如果不加repeated，默认就是singular的。
+```
+- 语言
+
+```
+增加了Go,Ruby,JavaNano等的支持
+未来还计划支持PHP等
+```
+- 移除了default选项
+
+```
+在proto2中，可使用default为field指定默认值。
+在proto3中，field的默认值只依赖于field的类型，不再能够被指定。
+当field的value为默认值时，该field不会被序列化，可节省空间。
+不要依赖于字段的默认值的行为，因为无法区分是指定为默认值，还是未定义值。
+```
+- 枚举类型的第一个枚举值必须是0
+
+```
+proto3中必须提供一个枚举值为0作为枚举的默认值。
+为了和proto2兼容（proto2使用第一个枚举值作为默认值），因此规定一个枚举值为0。
+```
+
+- 不再支持Extension，新增Any关键字
+
+```
+Any 类型是用来替代 proto2 中的扩展的。目前还在开发中。
+
+proto2 中的扩展特性很像 Swift 语言中的扩展。
+理解起来有点困难，使用起来更是会带来不少混乱。
+
+相比之下，proto3 中新增的 Any 类型有点像 C/C++ 中的 void*
+，好理解，使用起来逻辑也更清晰。
+```
+
+- 增加了 JSON 映射特性
+
+```
+语言的活力来自于与时俱进。当前，JSON 的流行有其充分的理由。
+很多『现代化』的语言都内置了对 JSON 的支持，比如 Go、PHP 等。
 
 ### Reflection
 - TODO
