@@ -1,0 +1,8 @@
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "-std=c++11 -g")
+include_directories(${PROJECT_SRC_PATH}/hooker)
+
+set(LIB_SRC Hooker.cpp Hooker.h HookerFactory.cpp HookerFactory.h HookerX64.cpp HookerX64.h )
+
+add_library(inline-hook SHARED ${LIB_SRC})
+
