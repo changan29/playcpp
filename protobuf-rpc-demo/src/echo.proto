@@ -1,0 +1,30 @@
+syntax = "proto3";
+package echo;
+
+option cc_generic_services = true;
+
+message EchoRequest {
+    string msg = 1;
+}
+
+message EchoResponse {
+    string msg = 2;
+}
+
+service EchoService {
+    rpc Echo(EchoRequest) returns (EchoResponse);
+}
+
+message A {
+    int32 a = 1;
+    int32 urls = 2;
+    int32 id = 3;
+}
+message B {
+    int32 b = 1;
+    message HeHeB {
+        repeated int32 urls = 1;
+    }
+    HeHeB hehe_a = 2;
+    string what = 3;
+}
